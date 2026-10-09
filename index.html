@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Detective Challenge – Registration</title>
+
+<!-- Fonts (same as the banner) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- COLORS (same as the banner) ---------- */
+  :root{
+    --navy:#0D1B3E;      /* page background */
+    --card:#16285A;      /* box background */
+    --line:#26407F;      /* box border */
+    --yellow:#FFC93C;    /* highlight colour */
+    --text:#FFFFFF;
+    --soft:#C9D3EE;      /* light grey-blue text */
+    --error:#FF8A8A;
+    --good:#3DDC84;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--navy); color:var(--text); font-family:'Nunito',system-ui,sans-serif; line-height:1.5; }
+  .wrap{ max-width:640px; margin:0 auto; padding:24px 16px 60px; }
+
+  /* ---------- TOP TITLE ---------- */
+  .tag{ display:inline-block; background:var(--yellow); color:var(--navy); font-family:'Baloo 2',sans-serif; font-weight:800; font-size:14px; letter-spacing:1px; padding:4px 14px; border-radius:999px; }
+  h1{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:40px; line-height:1; margin:14px 0 4px; }
+  h1 span{ color:var(--yellow); }
+  .sub{ color:var(--soft); margin:0 0 20px; font-size:17px; }
+
+  /* ---------- BOXES ---------- */
+  .card{ background:var(--card); border:2px solid var(--line); border-radius:18px; padding:20px; margin-bottom:16px; }
+  .card h2{ font-family:'Baloo 2',sans-serif; font-size:22px; margin:0 0 12px; color:var(--yellow); }
+
+  /* ---------- FORM FIELDS ---------- */
+  .field{ margin-bottom:14px; }
+  label{ display:block; font-weight:800; margin-bottom:5px; font-size:15px; }
+  .req{ color:var(--yellow); }
+  .hint{ font-size:13px; color:var(--soft); font-weight:600; }
+  input[type=text], input[type=email], input[type=tel], select{
+    width:100%; font-family:inherit; font-size:16px; padding:12px; border-radius:12px;
+    border:2px solid var(--line); background:#0F2049; color:var(--text);
+  }
+  input:focus, select:focus{ outline:3px solid var(--yellow); outline-offset:1px; }
+  .checks{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .check{ display:flex; align-items:center; gap:8px; background:#0F2049; border:2px solid var(--line); border-radius:12px; padding:10px 12px; font-weight:700; cursor:pointer; }
+  .check input{ width:20px; height:20px; accent-color:var(--yellow); }
+  .consent{ display:flex; gap:10px; align-items:flex-start; font-size:15px; font-weight:600; margin-bottom:10px; cursor:pointer; }
+  .consent input{ width:22px; height:22px; margin-top:2px; accent-color:var(--yellow); flex-shrink:0; }
+  .err{ color:var(--error); font-size:14px; font-weight:700; margin-top:4px; display:none; }
+
+  /* ---------- BUTTON ---------- */
+  button{ width:100%; background:var(--yellow); color:var(--navy); border:none; border-radius:14px; padding:16px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:22px; cursor:pointer; }
+  button:disabled{ opacity:.6; cursor:wait; }
+
+  /* ---------- THANK-YOU MESSAGE ---------- */
+  #thanks{ display:none; text-align:center; }
+  #thanks .big{ font-family:'Baloo 2',sans-serif; font-size:34px; color:var(--good); margin:0; }
+  .small{ font-size:13px; color:var(--soft); text-align:center; margin-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="tag">CASE FILE #01 · REGISTRATION</span>
+  <h1>QUIZ DETECTIVE <span>CHALLENGE</span></h1>
+  <p class="sub">Spot the mistake. Fix it. Win up to ₹1,000! Please ask a parent or guardian to fill this form.</p>
+
+  <!-- ================= THE FORM ================= -->
+  <form id="regForm" novalidate>
+
+    <!-- Box 1: about the student -->
+    <div class="card">
+      <h2>About the Student</h2>
+
+      <div class="field">
+        <label for="studentName">Student's full name <span class="req">*</span></label>
+        <input type="text" id="studentName" name="studentName" required>
+        <div class="err">Please write the student's name.</div>
+      </div>
+
+      <div class="field">
+        <label for="studentClass">Class <span class="req">*</span></label>
+        <select id="studentClass" name="studentClass" required>
+          <option value="">Choose a class</option>
+          <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+          <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+          <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+          <option>Class 10</option>
+        </select>
+        <div class="err">Please choose a class.</div>
+      </div>
+
+      <div class="field">
+        <label for="school">School name <span class="req">*</span></label>
+        <input type="text" id="school" name="school" required>
+        <div class="err">Please write the school name.</div>
+      </div>
+
+      <div class="field">
+        <label for="city">City <span class="req">*</span></label>
+        <input type="text" id="city" name="city" required>
+        <div class="err">Please write the city.</div>
+      </div>
+
+      <div class="field">
+        <label>Olympiad exams registered for <span class="req">*</span></label>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="olympiad" value="IMO (Maths)"> IMO (Maths)</label>
+          <label class="check"><input type="checkbox" name="olympiad" value="NSO (Science)"> NSO (Science)</label>
+          <label class="check"><input type="checkbox" name="olympiad" value="IEO (English)"> IEO (English)</label>
+          <label class="check"><input type="checkbox" name="olympiad" value="IGKO (GK)"> IGKO (GK)</label>
+          <label class="check"><input type="checkbox" name="olympiad" value="Cyber Olympiad"> Cyber Olympiad</label>
+          <label class="check"><input type="checkbox" name="olympiad" value="Other"> Other</label>
+        </div>
+        <div class="err" id="olyErr">Please tick at least one Olympiad.</div>
+      </div>
+
+      <div class="field">
+        <label for="rollNo">Olympiad roll / registration number <span class="hint">(optional)</span></label>
+        <input type="text" id="rollNo" name="rollNo">
+      </div>
+    </div>
+
+    <!-- Box 2: about the parent -->
+    <div class="card">
+      <h2>Parent / Guardian Details</h2>
+
+      <div class="field">
+        <label for="parentName">Parent / guardian name <span class="req">*</span></label>
+        <input type="text" id="parentName" name="parentName" required>
+        <div class="err">Please write the parent's name.</div>
+      </div>
+
+      <div class="field">
+        <label for="phone">WhatsApp number <span class="req">*</span> <span class="hint">(10 digits)</span></label>
+        <input type="tel" id="phone" name="phone" inputmode="numeric" maxlength="10" pattern="[6-9][0-9]{9}" required>
+        <div class="err">Please write a correct 10-digit mobile number.</div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" required>
+        <div class="err">Please write a correct email address.</div>
+      </div>
+
+      <div class="field">
+        <label for="source">How did you hear about us? <span class="hint">(optional)</span></label>
+        <select id="source" name="source">
+          <option value="">Choose one</option>
+          <option>WhatsApp</option><option>Instagram</option><option>Facebook</option>
+          <option>YouTube</option><option>School / Teacher</option><option>Friend</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Box 3: permission -->
+    <div class="card">
+      <h2>Permission</h2>
+      <label class="consent">
+        <input type="checkbox" id="consent" name="consent" value="Yes" required>
+        I am the parent or guardian of this student. I allow my child to take part in the Quiz Detective Challenge, and I agree that any prize will be paid to me.
+      </label>
+      <label class="consent">
+        <input type="checkbox" id="rules" name="rules" value="Yes" required>
+        I have read the rules: only ONE winner per class, the first accurate and verified review wins, and the organiser's decision is final.
+      </label>
+      <div class="err" id="consentErr">Please tick both boxes to continue.</div>
+    </div>
+
+    <button type="submit" id="submitBtn">CLAIM YOUR CLASS SLOT →</button>
+    <p class="small">We use these details only for this challenge and to contact the parent. We never share them.</p>
+  </form>
+
+  <!-- ================= THANK-YOU MESSAGE (hidden at first) ================= -->
+  <div class="card" id="thanks">
+    <p class="big">You're registered! 🕵️</p>
+    <p>Thank you. We will send the challenge details to your WhatsApp number soon.</p>
+  </div>
+
+</div>
+
+<script>
+/* ==========================================================
+   STEP 1: PASTE YOUR GOOGLE SCRIPT LINK HERE
+   (You get this link after the Google Sheet setup steps.)
+   ========================================================== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7mME3QXsOrgmZ6CaEfOxobIf7_0vpqAoEl3APEnEBhvcLAavQ9cYQMrdxVWldSthi/exec";
+
+
+/* ---------- Get the parts of the page we need ---------- */
+const form      = document.getElementById("regForm");
+const submitBtn = document.getElementById("submitBtn");
+const thanks    = document.getElementById("thanks");
+
+/* ---------- Show or hide a red error message under a field ---------- */
+function showError(input, show){
+  const errorBox = input.closest(".field").querySelector(".err");
+  if (errorBox) errorBox.style.display = show ? "block" : "none";
+}
+
+/* ---------- Check that the form is filled correctly ---------- */
+function checkForm(){
+  let allGood = true;
+
+  // 1. Check every normal box that is required
+  const requiredBoxes = form.querySelectorAll("input[type=text][required], input[type=tel], input[type=email], select[required]");
+  requiredBoxes.forEach(function(box){
+    const ok = box.checkValidity() && box.value.trim() !== "";
+    showError(box, !ok);
+    if (!ok) allGood = false;
+  });
+
+  // 2. At least one Olympiad must be ticked
+  const ticked = form.querySelectorAll("input[name=olympiad]:checked").length;
+  document.getElementById("olyErr").style.display = ticked ? "none" : "block";
+  if (!ticked) allGood = false;
+
+  // 3. Both permission boxes must be ticked
+  const agreed = document.getElementById("consent").checked && document.getElementById("rules").checked;
+  document.getElementById("consentErr").style.display = agreed ? "none" : "block";
+  if (!agreed) allGood = false;
+
+  return allGood;
+}
+
+/* ---------- When the button is pressed ---------- */
+form.addEventListener("submit", function(event){
+  event.preventDefault();          // stop the page from reloading
+
+  if (!checkForm()) {              // if something is missing, stop here
+    alert("Please fill the boxes marked in red.");
+    return;
+  }
+
+  // Put all answers into one package
+  const data = new FormData(form);
+  // Join all ticked Olympiads into one line, e.g. "IMO (Maths), NSO (Science)"
+  const olympiads = data.getAll("olympiad").join(", ");
+  data.delete("olympiad");
+  data.append("olympiad", olympiads);
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Saving...";
+
+  // Send the package to your Google Sheet
+  fetch(SCRIPT_URL, { method: "POST", body: data, mode: "no-cors" })
+    .then(function(){
+      form.style.display = "none";     // hide the form
+      thanks.style.display = "block";  // show the thank-you message
+      window.scrollTo(0, 0);
+    })
+    .catch(function(){
+      alert("Sorry, something went wrong. Please check your internet and try again.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "CLAIM YOUR CLASS SLOT →";
+    });
+});
+</script>
+</body>
+</html>
